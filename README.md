@@ -1,9 +1,3 @@
----
-search:
-  keyword:
-    - gamepot
----
-
 # Gamepot-Sample-Unity
 
 ## 사용하기 전에
