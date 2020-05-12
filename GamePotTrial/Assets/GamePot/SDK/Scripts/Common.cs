@@ -3,19 +3,6 @@ using System.Collections;
 
 public class NCommon
 {
-
-	// openDeep MenuID
-	// public enum AdActions
-	// {
-	//     APPLICATION_START,
-	//     RESUME,
-	//     PAUSE,
-	//     TUTORIAL_COMPLETE,
-	//     LEVEL,
-	//     EVENT,
-	//     BILLING
-	// }
-
 	public enum LoginType
 	{
 		NONE,
@@ -43,13 +30,6 @@ public class NCommon
 		APPLE,
 		THIRDPARTYSDK
 	}
-
-	// public enum AdType
-	// {
-	//     FACEBOOK,
-	//     ADJUST,
-	//     ADBRIX,
-	// }
 
 	public enum LinkingType
 	{
