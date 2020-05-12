@@ -58,7 +58,7 @@ namespace GamePotSample
             }
             ActiveLoginButton(true);
 
-            // Auto Login
+            // Auto Login - Removed for Trial
             // NCommon.LoginType type = GamePot.getLastLoginType();
             // if (type != NCommon.LoginType.NONE && type != NCommon.LoginType.THIRDPARTYSDK)
             // {
@@ -84,7 +84,6 @@ namespace GamePotSample
         public void ClickGoogleLoginButton()
         {
             GamePot.login(NCommon.LoginType.GOOGLE);
-            //GamePot.login(NCommon.LoginType.APPLE);
         }
 
         public void ClickFacebookLoginButton()
@@ -114,7 +113,6 @@ namespace GamePotSample
 
         public void Click3rdPartyLoginButton(InputField input)
         {
-            //    GamePot.loginByThirdPartySDK("apqwer1234");
             GamePot.loginByThirdPartySDK(input.text);
         }
 
@@ -122,30 +120,7 @@ namespace GamePotSample
         {
             NAgreeInfo info = new NAgreeInfo();
             info.theme = "green";
-            // info.headerBackGradient = new string[] { "0xFF00050B", "0xFF0F1B21" };
-            // info.headerTitleColor = "0xFFFF0000";
-            // info.headerBottomColor = "0xFF00FF00";
-            // info.headerTitle = "test";
-            // info.headerIconDrawable = "ic_stat_gamepot_small";
-
-            // info.contentBackGradient = new string[] { "0xFFff2432", "0xFF11ff32" };
-            // info.contentIconColor = "0xFF0429ff";
-            // info.contentCheckColor = "0xFFffadb5";
-            // info.contentTitleColor = "0xFF98ffc6";
-            // info.contentShowColor = "0xFF98b3ff";
-            // info.contentIconDrawable = "ic_stat_gamepot_agree";
-
-            // info.footerBackGradient = new string[] { "0xFFFFFFFF", "0xFF112432" };
-            // info.footerButtonGradient = new string[] { "0xFF1E3A57", "0xFFFFFFFF" };
-            // info.footerButtonOutlineColor = "0xFFff171a";
-            // info.footerTitleColor = "0xFFFF00D5";
-            // info.footerTitle = "test2";
             info.showNightPush = true;
-
-            // info.allMessage = "unity all";
-            // info.termMessage = "unity terms";
-            // info.privacyMessage = "unity privacy";
-            // info.nightPushMessage = "unity night push";
             GamePot.showAgreeDialog(info);
         }
 
@@ -154,9 +129,14 @@ namespace GamePotSample
             string result = input.text;
             projectidInput.text = result;
             GamePot.setProjectID(result);
-            PopupManager.ShowCommonPopup(popupRoot, PopupManager.CommonPopupType.SMALL_SIZE, "ProjectID", "Project ID : " + result + "\n\n 앱을 재시작 해주세요.", "확인", () => { Application.Quit(); });
+            PopupManager.ShowCommonPopup(popupRoot, PopupManager.CommonPopupType.SMALL_SIZE, "ProjectID", "변경된 Project ID : " + result + "\n\n 앱을 재시작 해주세요.", "확인", () => { Application.Quit(); });
         }
 
+        public void ClickProjectResetButton()
+        {
+            projectidInput.text = GamePot.DefaultProjectId;
+            ClickProjectIDButton(projectidInput);
+        }
 
         #endregion
 
@@ -167,7 +147,6 @@ namespace GamePotSample
         }
 
         // GamePot Interface
-
         public void onAppClose()
         {
             Application.Quit();
@@ -315,7 +294,7 @@ namespace GamePotSample
 
         public void onWebviewClose(string result)
         {
-            GamePot.d("gamepot webview return : ", result);
+            Debug.Log("gamepot webview return : " + result);
         }
 
         public void onResetForChangedProject(string projectid)

@@ -2,7 +2,6 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Callbacks;
-//using UnityEditor.XCodeEditor;
 #endif
 using System.IO;
 using System.Collections.Generic;
@@ -80,16 +79,7 @@ public static class XCodePostProcessSDK
     	pbxProject.AddFrameworkToProject(targetGuid, "AuthenticationServices.framework", false);
     	pbxProject.AddFrameworkToProject(targetGuid, "LocalAuthentication.framework", false);
 
-
 		AddLibToProject (pbxProject, targetGuid, "libz.tbd");
-
-
-		// const string gamepotGameCenterFrameworkName = "GamePotGameCenter.framework";
-		// if(Directory.Exists(Application.dataPath + "/Plugins/IOS/Frameworks/"+gamepotGameCenterFrameworkName))
-		// {
-		// 	pbxProject.AddCapability (targetGuid, PBXCapabilityType.GameCenter);
-		// }
-
 		const string frameworkPath = "Frameworks/Plugins/IOS/Frameworks/";
 
 		const string twitterCoreFrameworkName = "TwitterCore.framework";
@@ -125,72 +115,8 @@ public static class XCodePostProcessSDK
 
 		pbxProject.RemoveFileFromBuild(targetGuid, "TwitterCore.framework");
 		pbxProject.AddBuildProperty(targetGuid, "LD_RUNPATH_SEARCH_PATHS", "@executable_path/Frameworks");
-		// Add External Framework
-////		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "AdBrix.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "AdjustSdk.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "AFNetworking.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "Bolts.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "CrashReporter.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "FBSDKCoreKit.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "FBSDKLoginKit.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "FirebaseAnalytics.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "FirebaseCore.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "FirebaseCoreDiagnostics.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "FirebaseInstanceID.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "FirebaseMessaging.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "FirebaseNanoPB.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePot.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotAd.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotAdAdbrix.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotAdAdjust.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotAdFacebook.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotChannel.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotFacebook.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotGameCenter.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotGoogleSignIn.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotLogger.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotNavarCafe.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GamePotNaver.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GoogleSignIn.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GoogleToolboxForMac.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GTMOAuth2.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "GTMSessionFetcher.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "IgaworksCore.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "nanopb.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "NaverCafeSDK.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "Nelo2SDK.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "Protobuf.framework");
-//		AddExternalFramework(pbxProject, targetGuid, pathToBuiltProject, "NaverLogin-thirdPartyModule");
-
-		// Add Bundle
-//		AddBundle (pbxProject, targetGuid, pathToBuiltProject, "GoogleSignIn.bundle");
-//		AddBundle (pbxProject, targetGuid, pathToBuiltProject, "NaverAuth.bundle");
-//		AddBundle (pbxProject, targetGuid, pathToBuiltProject, "NaverCafeSDK.bundle");
-//		AddBundle (pbxProject, targetGuid, pathToBuiltProject, "GamePot.bundle");
-
-		// Add Source file
-//		CopyAndReplaceDirectory(Application.dataPath + "/Plugins/IOS/Source", Path.Combine(pathToBuiltProject, "GamePotSource"));
-//
-//		List<string> sources = new List<string>();
-//		sources.Add ("GamePotAppDelegate.h");
-//		sources.Add ("GamePotAppDelegate.mm");
-//		sources.Add ("GamePotBinding.mm");
-//		sources.Add ("GamePotManager.h");
-//		sources.Add ("GamePotManager.mm");
-//
-//		foreach (string source in sources) {
-//			string name = pbxProject.AddFile("GamePotSource/" + source, "GamePotSource/" + source, PBXSourceTree.Source);
-//			Debug.Log("Add File: " + source);
-//			pbxProject.AddFileToBuild(targetGuid, name);
-//		}
-
-		// Add Capabiltity
-		//		pbxProject.AddCapability (targetGuid, PBXCapabilityType.GameCenter);
-		//		pbxProject.AddCapability (targetGuid, PBXCapabilityType.InAppPurchase);
-		//		pbxProject.AddCapability (targetGuid, PBXCapabilityType.PushNotifications);
-		//		pbxProject.AddCapability (targetGuid, PBXCapabilityType.AssociatedDomains);
-
-
+	
+	
 		//GamePot Config Key
 		if (File.Exists (pathToBuiltProject + "/GamePotConfig-Info.plist")) {
 			File.Delete (pathToBuiltProject + "/GamePotConfig-Info.plist");
@@ -201,7 +127,6 @@ public static class XCodePostProcessSDK
 		}
 
 		File.Copy(Application.dataPath + "/Plugins/IOS/GamePotConfig-Info.plist", pathToBuiltProject + "/GamePotConfig-Info.plist");
-//		FileUtil.CopyFileOrDirectory(Application.dataPath + "/Plugins/IOS/GamePotConfig-Info.plist", pathToBuiltProject + "/GamePotConfig-Info.plist");
 		pbxProject.AddFileToBuild(targetGuid, pbxProject.AddFile("GamePotConfig-Info.plist", "GamePotConfig-Info.plist"));
 
 		File.Copy(Application.dataPath + "/Plugins/IOS/GoogleService-Info.plist", pathToBuiltProject + "/GoogleService-Info.plist");

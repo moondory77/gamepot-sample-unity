@@ -225,7 +225,6 @@
 #if __has_include(<GamePotAd/GamePotAd.h>)
     [[GamePotAd getInstance] tracking:RESUME];
 #endif
-    //[super applicationWillEnterForeground:application];
 }
 
 
@@ -236,15 +235,12 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    //[super applicationWillTerminate:application];
 }
 
 #pragma mark - UNUserNotificationCenterDelegate
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
 {
     NSLog(@"User Info : %@",notification.request.content.userInfo);
-    //    completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
 }
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler

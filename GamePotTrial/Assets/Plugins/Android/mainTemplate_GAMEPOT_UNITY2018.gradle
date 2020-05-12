@@ -93,7 +93,7 @@ android {
 
 resValue "string", "gamepot_project_id", "" // required
         resValue "string", "gamepot_api_url", "" // required 10.78.160.183:4000
-        resValue "string", "gamepot_dash_url", "https://cloud-dashboard.gamepot.io"
+        resValue "string", "gamepot_dash_url", ""
         resValue "string", "gamepot_store", "google" // required
         resValue "string", "gamepot_app_title","@string/app_name" // required (fcm)
         resValue "string", "gamepot_push_default_channel","Default" // required (fcm)

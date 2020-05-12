@@ -190,7 +190,7 @@ namespace GamePotSample
             }
         }
 
-#region UIButton.onClick
+        #region UIButton.onClick
         public void ClickSettingsButton()
         {
             mainUI.SetActive(false);
@@ -220,12 +220,7 @@ namespace GamePotSample
 
         public void ClickNoticeButton()
         {
-            // GamePot.showNoticeWebView();
             GamePot.showNotice(true);
-            // GamePot.showWebView("http://27.96.130.104:8081/testbed/webbridge", 
-            // (string result)=> {
-            //     GamePot.d("moondory77 ", "showWebviewClose : " + result);
-            // });
         }
 
         public void ClickCouponButton()
@@ -262,18 +257,17 @@ namespace GamePotSample
         public void ClickInAppItem1()
         {
 #if !UNITY_EDITOR && UNITY_IOS
-        GamePot.purchase("gamepot001");
+        GamePot.purchase("purchase_001");
 #elif !UNITY_EDITOR && UNITY_ANDROID
         GamePot.purchase("purchase_001");
 #elif UNITY_EDITOR
 #endif
-            // GamePot.purchaseThirdPayments("purchase_001");
         }
 
         public void ClickInAppItem2()
         {
 #if !UNITY_EDITOR && UNITY_IOS
-        GamePot.purchase("gamepot001");
+        GamePot.purchase("purchase_002");
 #elif !UNITY_EDITOR && UNITY_ANDROID
         GamePot.purchase("purchase_002");
 #elif UNITY_EDITOR
@@ -282,19 +276,18 @@ namespace GamePotSample
 
         public void ClickInAppItem3()
         {
-            var r = new System.Random();
-            string tmp = (r.Next(100000, 999999) * 1000).ToString();
+            string tmp_receipt = (new System.Random().Next(100000, 999999) * 1000).ToString();
+            string tmp_uniqueNum = (new System.Random().Next(10000, 99999)).ToString();
 
 #if !UNITY_EDITOR && UNITY_IOS
-            GamePot.sendPurchaseByThirdPartySDK("purchase_001", tmp, "KRW", 1000,  "apple", "apple", "purchaseBy3rdPartySDK");
+            GamePot.sendPurchaseByThirdPartySDK("purchase_001", tmp_receipt, "KRW", 1000,  "third_party", "third_party", "purchaseBy3rdPartySDK_" + tmp_uniqueNum);
 #elif !UNITY_EDITOR && UNITY_ANDROID
-              GamePot.sendPurchaseByThirdPartySDK("purchase_001", tmp, "KRW", 1200, "google", "google", "purchaseBy3rdPartySDK");
+              GamePot.sendPurchaseByThirdPartySDK("purchase_001", tmp_receipt, "KRW", 1200, "third_party", "third_party", "purchaseBy3rdPartySDK_" + tmp_uniqueNum);
 #endif
         }
 
         public void ClickCSButton()
         {
-            // GamePot.showCSWebView();
             GamePot.showFaq();
         }
 
@@ -415,7 +408,7 @@ namespace GamePotSample
         {
             GamePot.loadAchievement();
         }
-#endregion
+        #endregion
 
         // GamePot Interface
         public void onAppClose()

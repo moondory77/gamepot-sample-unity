@@ -2,15 +2,7 @@
 #import <GamePot/GamePot.h>
 #import <GamePotChannel/GamePotChannel.h>
 #import <StoreKit/StoreKit.h>
-// #if __has_include(<GamePotAd/GamePotAd.h>)
-// #import <GamePotAd/GamePotAd.h>
-// #endif
-// #if __has_include(<GamePotAdFacebook/GamePotAdFacebook.h>)
-// #import <GamePotAdFacebook/GamePotAdFacebook.h>
-// #endif
-// #if __has_include(<GamePotAdAdjust/GamePotAdAdjust.h>)
-// #import <GamePotAdAdjust/GamePotAdAdjust.h>
-// #endif
+
 #if __has_include(<Gamepot/GamePotSendLog.h>)
 #import <Gamepot/GamePotSendLog.h>
 #import <Gamepot/GamePotSendLogCharacter.h>
@@ -40,9 +32,7 @@
 #if __has_include(<GamePotApple/GamePotApple.h>)
 #import <GamePotApple/GamePotApple.h>
 #endif
-// #if __has_include(<GamePotNaverCafe/GamePotNaverCafe.h>)
-// #import <GamePotNaverCafe/GamePotNaverCafe.h>
-// #endif
+
 UIViewController *UnityGetGLViewController();
 const char* ListenerForUnity = "GamePotiOSManager";
 @interface GamePotManager()  <GamePotPurchaseDelegate> {
@@ -57,24 +47,7 @@ const char* ListenerForUnity = "GamePotiOSManager";
 
 - (void)GamePotPurchaseSuccess:(GamePotPurchaseInfo *)_info
 {
-    // _info.Prdouctid와 adjustKey 비교 하여 adjustValue를 setAdjustKey에 추가
-// #if __has_include(<GamePotAdAdjust/GamePotAdAdjust.h>)
-    //    if(adjustBillingDic != nil && adjustBillingDic.count > 0)
-    //    {
-    //        for (NSString *key in adjustBillingDic) {
-    //            if([[_info productId] isEqualToString:key])
-    //                [_info setAdjustKey:[adjustBillingDic valueForKey:key]];
-    //        }
-    //    }
-// #endif
-
-// #if __has_include(<GamePotAd/GamePotAd.h>)
-//        [[GamePotAd getInstance] tracking:BILLING obj:_info];
-// #endif
-    //    UnitySendMessage(ListenerForUnity, "onCharged", sendStr);
-
     UnitySendMessage(ListenerForUnity, "onPurchaseSuccess", [[_info toJsonString] UTF8String]);
-
 }
 
 - (void)GamePotPurchaseFail:(NSError *)_error
@@ -580,7 +553,6 @@ const char* ListenerForUnity = "GamePotiOSManager";
     @try
     {
         [[GamePotChannel getInstance] DeleteMemberWithSuccess:^{
-            //            const char *sendStr = [[NSString stringWithFormat:@"탈퇴를 성공했습니다."] UTF8String];
             UnitySendMessage(ListenerForUnity, "onDeleteMemberSuccess", "" );
         } fail:^(NSError *error) {
             NSDictionary *dic = [error userInfo];
@@ -616,144 +588,6 @@ const char* ListenerForUnity = "GamePotiOSManager";
         }
     }];
 }
-
-// - (void) createTutirialData:(NSString*) tutorialData
-// {
-// #if __has_include(<GamePotAd/GamePotAd.h>)
-//     NSData* jsonData = [tutorialData dataUsingEncoding:NSUTF8StringEncoding];
-//     NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONWritingPrettyPrinted error:nil];
-//     NSString * contentData = [dic valueForKey:@"contentData"];
-//     NSString * contentId = [dic valueForKey:@"contentId"];
-//     NSString * isSuccess = [dic valueForKey:@"isSuccess"];
-//     NSString * adjustKey = [dic valueForKey:@"adjustKey"];
-
-//     TrackerTutorial* tutorialEvent = [[TrackerTutorial alloc] init];
-//     [tutorialEvent setContentData:contentData];
-//     [tutorialEvent setContentId:contentId];
-//     [tutorialEvent setSuccess:[isSuccess boolValue]];
-//     [tutorialEvent setAdjustKey:adjustKey];
-
-//     [[GamePotAd getInstance] tracking:TUTORIAL_COMPLETE obj:tutorialEvent];
-// #endif
-// }
-
-// - (void) createLevelData:(NSString*) levelData
-// {
-// #if __has_include(<GamePotAd/GamePotAd.h>)
-//     NSData* jsonData = [levelData dataUsingEncoding:NSUTF8StringEncoding];
-//     NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONWritingPrettyPrinted error:nil];
-//     NSString * levelInfo = [dic valueForKey:@"level"];
-//     NSString * adjustKey = [dic valueForKey:@"adjustKey"];
-
-//     TrackerLevel* level = [[TrackerLevel alloc] init];
-
-//     [level setLevel:levelInfo];
-//     [level setAdjustKey:adjustKey];
-
-//     [[GamePotAd getInstance] tracking:LEVEL obj:level];
-// #endif
-// }
-
-// - (void) createEventData:(NSString*) eventData
-// {
-// #if __has_include(<GamePotAd/GamePotAd.h>)
-//     NSData* jsonData = [eventData dataUsingEncoding:NSUTF8StringEncoding];
-//     NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONWritingPrettyPrinted error:nil];
-//     NSString * eventInfo = [dic valueForKey:@"event"];
-//     NSString * adjustKey = [dic valueForKey:@"adjustKey"];
-
-//     TrackerEvent* event = [[TrackerEvent alloc] init];
-//     [event setEvent:eventInfo];
-//     [event setAdjustKey:adjustKey];
-
-//     [[GamePotAd getInstance] tracking:EVENT obj:event];
-// #endif
-// }
-
-//tracking 가공 함수 End
-
-// - (void) tracking:(NSString*) adActions info:(NSString *)info {
-//     if([adActions isEqualToString:@"TUTORIAL_COMPLETE"])
-//         [self createTutirialData:info];
-//     else if([adActions isEqualToString:@"LEVEL"])
-//         [self createLevelData:info];
-//     else if([adActions isEqualToString:@"EVENT"])
-//         [self createEventData:info];
-// }
-
-// // NaverCafe
-// - (void) naverCafeInit {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] setup];
-//     #endif
-// }
-
-// - (void) naverCafeInitGlobal {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] setupGlobal];
-//     #endif
-// }
-
-// - (void) naverCafeStartHome {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] start:UnityGetGLViewController() setMenuIndex:0];
-//     #endif
-// }
-
-// - (void) naverCafeStartImageWrite:(NSString*) imageUri {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] startImageWrite:UnityGetGLViewController() setFilepath:imageUri];
-//     #endif
-// }
-
-// - (void) naverCafeStartAllVideos {}
-// - (void) naverCafeStartWrite {}
-// - (void) naverCafeStartAllImages {}
-
-// - (void) naverCafeStartVideoWrite:(NSString*)videoUri {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] startVideoWrite:UnityGetGLViewController() setFilepath:videoUri];
-//     #endif
-// }
-
-
-
-// - (void) naverCafeSetWidgetEnable:(BOOL) enable {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] setWidgetEnable:enable];
-//     #endif
-// }
-
-// - (void) naverCafeSetUseScreenshot:(BOOL) enable {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] setUseWidgetScreenShot:enable];
-//     #endif
-// }
-
-// - (void) naverCafeSetUserId:(NSString*) userId {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] setUserId:userId];
-//     #endif
-// }
-
-// - (void) naverCafeSetChannelCode:(NSString*) channelCode {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] setChannelCode:channelCode];
-//     #endif
-// }
-
-// - (void) naverCafeSetUseVideoRecord:(BOOL) enable {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] setUseWidgetVideoRecord:enable];
-//     #endif
-// }
-
-// - (void) naverCafeStartMenu:(int) menuId {
-//     #if __has_include(<NNavarCafe/NNavarCafe.h>)
-//     [[NNaverCafe getInstance] start:UnityGetGLViewController() setMenuIndex:menuId];
-//     #endif
-// }
-
 
 - (void) logout
 {
@@ -791,22 +625,6 @@ const char* ListenerForUnity = "GamePotiOSManager";
     }
     else if([loginType isEqualToString:@"NONE"]){}
 }
-
-// - (void) addAd:(NSString*) adType
-// {
-// #if __has_include(<GamePotAd/GamePotAd.h>)
-//     if([adType isEqualToString:@"FACEBOOK"]){
-// #if __has_include(<GamePotAdFacebook/GamePotAdFacebook.h>)
-//         [[GamePotAd getInstance] addAds:[[GamePotAdFacebook alloc] init]];
-// #endif
-//     }
-//     else if([adType isEqualToString:@"ADJUST"]){
-// #if __has_include(<GamePotAdAdjust/GamePotAdAdjust.h>)
-//         [[GamePotAd getInstance] addAds:[[GamePotAdAdjust alloc] init]];
-// #endif
-//     }
-// #endif
-// }
 
 - (void) enableGameCenter:(BOOL) enable;
 {
@@ -962,14 +780,6 @@ const char* ListenerForUnity = "GamePotiOSManager";
    return [[GamePot getInstance] getPurchaseItemsJsonString];
 }
 
-- (void) setAdjustData:(NSString*)adjustBillingData
-{
-    //    #if __has_include(<GamePotAdAdjust/GamePotAdAdjust.h>)
-    //    NSData* jsonData = [adjustBillingData dataUsingEncoding:NSUTF8StringEncoding];
-    //    adjustBillingDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONWritingPrettyPrinted error:nil];
-    //    #endif
-}
-
 - (void) setPush:(BOOL) pushEnable
 {
     [[GamePot getInstance] setPushEnable:pushEnable success:^{
@@ -1027,13 +837,6 @@ const char* ListenerForUnity = "GamePotiOSManager";
         [[GamePot getInstance] showWebView:UnityGetGLViewController() setType:WEBVIEW_NORMALWITHBACK setURL:url];
     });
 }
-
-// - (void) setSandbox:(BOOL) enable
-// {
-// #if __has_include(<GamePotAd/GamePotAd.h>)
-//    [[GamePotAd getInstance] setSandbox:enable];
-// #endif
-// }
 
 - (void) showAppStatus:(NSString*)status
 {
