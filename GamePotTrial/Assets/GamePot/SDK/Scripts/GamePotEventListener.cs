@@ -218,6 +218,7 @@ public class GamePotEventListener : MonoBehaviour
         }
     }
 
+
     public void onCouponSuccess(string result)
     {
         Debug.Log("GamePotEventListener::onCouponSuccess() " + result);

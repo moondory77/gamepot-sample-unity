@@ -2,7 +2,6 @@
 
 namespace GamePotUnityAOS
 {
-
     public class GamePotUnityPluginAOS
     {
         private static bool _initialized = false;
@@ -10,7 +9,6 @@ namespace GamePotUnityAOS
 
         //Native Android Class Name
         protected const string GAMEPOT_CLASS_NAME = "io.gamepot.unity.plugin.GamePotUnityPlugin";
-
 
         public static void initPlugin()
         {
@@ -30,7 +28,6 @@ namespace GamePotUnityAOS
 
                 if (mGamePotClass != null)
                 {
-                    Debug.Log("GamePotUnityPluginAOS Success!!!");
                     _initialized = true;
                 }
                 else
@@ -348,7 +345,6 @@ namespace GamePotUnityAOS
 #endif
         }
 
-
         public static bool isLinked(string linkType)
         {
 #if UNITY_ANDROID
@@ -368,7 +364,6 @@ namespace GamePotUnityAOS
             return false;      
 #endif
         }
-
 
         public static string getLinkedList()
         {
@@ -642,8 +637,6 @@ namespace GamePotUnityAOS
 #endif
         }
 
-
-
         public static void setVoidBuilder(string info)
         {
 #if UNITY_ANDROID
@@ -657,7 +650,6 @@ namespace GamePotUnityAOS
             }
 #endif
         }
-
 
         public static void showTerms()
         {
@@ -728,7 +720,6 @@ namespace GamePotUnityAOS
             }
 #endif
         }
-
 
         public static void setLoggerUserid(string userid)
         {
@@ -896,7 +887,6 @@ namespace GamePotUnityAOS
 #endif
         }
 
-
         public static string getFCMToken()
         {
 #if UNITY_ANDROID
@@ -932,7 +922,6 @@ namespace GamePotUnityAOS
 #endif
         }
 
-
         public static void sendPurchaseByThirdPartySDK(string productId, string transactionId, string currency, double price, string store, string paymentId, string uniqueId)
         {
 #if UNITY_ANDROID
@@ -961,27 +950,25 @@ namespace GamePotUnityAOS
 #endif
         }
 
-        public static void setProjectID(string projectid)
+        public static bool isUseLibrary(string libraryName)
         {
-            if (Application.platform == RuntimePlatform.Android)
+#if UNITY_EDITOR
+            {
+                Debug.Log("GamePot - UNITY EDITOR isUseLibrary not supported");
+                return false;
+            }
+#elif UNITY_ANDROID
             {
                 if (mGamePotClass != null)
-                    mGamePotClass.CallStatic("setProjectID", projectid);
+                {
+                    return mGamePotClass.CallStatic<bool>("isUseLibrary", libraryName);
+                }
+                else
+                { 
+                    return false;
+                }
             }
-            else
-            {
-                Debug.Log("GamePot - UNITY EDITOR setProjectID not supported");
-            }
-        }
-
-        public static string getProjectID()
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                if (mGamePotClass != null)
-                    return mGamePotClass.CallStatic<string>("getProjectID");
-            }
-            return "";
+#endif
         }
 
     }

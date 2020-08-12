@@ -48,6 +48,7 @@ const char* ListenerForUnity = "GamePotiOSManager";
 - (void)GamePotPurchaseSuccess:(GamePotPurchaseInfo *)_info
 {
     UnitySendMessage(ListenerForUnity, "onPurchaseSuccess", [[_info toJsonString] UTF8String]);
+
 }
 
 - (void)GamePotPurchaseFail:(NSError *)_error
@@ -553,6 +554,7 @@ const char* ListenerForUnity = "GamePotiOSManager";
     @try
     {
         [[GamePotChannel getInstance] DeleteMemberWithSuccess:^{
+            //            const char *sendStr = [[NSString stringWithFormat:@"탈퇴를 성공했습니다."] UTF8String];
             UnitySendMessage(ListenerForUnity, "onDeleteMemberSuccess", "" );
         } fail:^(NSError *error) {
             NSDictionary *dic = [error userInfo];
@@ -588,6 +590,7 @@ const char* ListenerForUnity = "GamePotiOSManager";
         }
     }];
 }
+
 
 - (void) logout
 {
@@ -625,6 +628,7 @@ const char* ListenerForUnity = "GamePotiOSManager";
     }
     else if([loginType isEqualToString:@"NONE"]){}
 }
+
 
 - (void) enableGameCenter:(BOOL) enable;
 {
@@ -778,6 +782,14 @@ const char* ListenerForUnity = "GamePotiOSManager";
 - (NSString*) getPurchaseItems
 {
    return [[GamePot getInstance] getPurchaseItemsJsonString];
+}
+
+- (void) setAdjustData:(NSString*)adjustBillingData
+{
+    //    #if __has_include(<GamePotAdAdjust/GamePotAdAdjust.h>)
+    //    NSData* jsonData = [adjustBillingData dataUsingEncoding:NSUTF8StringEncoding];
+    //    adjustBillingDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONWritingPrettyPrinted error:nil];
+    //    #endif
 }
 
 - (void) setPush:(BOOL) pushEnable

@@ -33,8 +33,11 @@
  
  * 2.1.0
  - Release
+ 
+ * 2.1.1
+ - 테스트 결제 중 특정 상황에 결제가 되지 않는 문제 수정
 ============================================================================= */
-#define GAMEPOT_VERSION @"2.1.0"
+#define GAMEPOT_VERSION @"2.1.1"
 
 //! Project version number for Common.
 FOUNDATION_EXPORT double GamePotVersionNumber;
@@ -184,6 +187,18 @@ setShowTodayButton:(BOOL)_showTodayButton
 - (void)showAgreeView:(UIViewController*)_viewController option:(GamePotAgreeOption*)_option handler:(GamePotAgreeHandler)_handler;
 - (NSString*) getPushToken;
 
+- (void) handleRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
+
+- (BOOL) isReady;
+
+- (NSString*) getChannelToken;
+- (NSString*) getChannel;
+- (NSString*) getChannelId;
+- (NSString*) getCountry;
+- (NSString*) getRemoteIP;
+- (void) setDisableBilling:(BOOL)_billingDisable;
+
+
 //! 사용하지 말것
 - (void) doDeleteMember:(GamePotInnerHandler)_handler;
 - (void) doCreateLinking:(NSString*)_userName
@@ -202,17 +217,9 @@ setShowTodayButton:(BOOL)_showTodayButton
                        provider:(NSString*)_provider
                         handler:(GamePotInnerHandler)_handler;
 
-- (void) handleRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
-
-- (BOOL) isReady;
-
-- (NSString*) getChannelToken;
-- (NSString*) getChannel;
-- (NSString*) getChannelId;
 
 - (void) setupWithSetProject:(NSString*)_projectId setLincens:(NSString*)_licensURL;
 - (void) setBeta:(BOOL)_betaEnable;
 
-- (void) setDisableBilling:(BOOL)_billingDisable;
 
 @end

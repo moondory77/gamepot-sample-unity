@@ -17,5 +17,6 @@
 // Charge
 #define CODE_CHARGE_UNKNOWN_ERROR 5000 // 결제에서 알 수 없는 오류 발생 및 스토어 측에서 Error를 전달 할 때
 #define CODE_CHARGE_NO_ITEM 5001 // 없는 결제 아이템 일때
+#define CODE_CHARGE_NO_RECEIPT 5002 // 영수증 조회 불가능
 
 #endif /* NError_h */

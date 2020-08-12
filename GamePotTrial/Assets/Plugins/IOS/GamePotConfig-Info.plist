@@ -2,19 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<key>gamepot_facebook_app_id</key>
-<string></string>
-<key>gamepot_facebook_display_name</key>
-<string>Gamepot Trial</string>
-<key>gamepot_google_app_id</key>
-<string></string>
-<key>gamepot_google_url_schemes</key>
-<string></string>
 <key>gamepot_project_id</key>
 <string></string>
 <key>gamepot_api_url</key>
 <string></string>
 <key>gamepot_dash_url</key>
+<string></string>
+<key>gamepot_facebook_app_id</key>
+<string></string>
+<key>gamepot_facebook_display_name</key>
+<string></string>
+<key>gamepot_google_app_id</key>
+<string></string>
+<key>gamepot_google_url_schemes</key>
+<string></string>
+<key>gamepot_naver_clientid</key>
+<string></string>
+<key>gamepot_naver_secretid</key>
+<string></string>
+<key>gamepot_naver_urlscheme</key>
+<string></string>
+<key>gamepot_line_channelid</key>
+<string></string>
+<key>gamepot_line_url_schemes</key>
+<string></string>
+<key>gamepot_twitter_consumerkey</key>
+<string></string>
+<key>gamepot_twitter_consumersecret</key>
+<string></string>
+<key>gamepot_elsa_projectid</key>
 <string></string>
 </dict>
 </plist>

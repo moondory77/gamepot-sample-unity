@@ -11,7 +11,6 @@
         android:label="@string/app_name"
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="false"
-        android:usesCleartextTraffic = "true"
         tools:replace="android:allowBackup"
         >
         <activity android:theme="@style/UnityThemeSelector"
@@ -31,6 +30,7 @@
             </intent-filter>
             <meta-data android:name="unityplayer.SkipPermissionsDialog" android:value="true" />
             <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+
         </activity>
 
         <!--갤럭시 S8과 같은 스크린 대응-->

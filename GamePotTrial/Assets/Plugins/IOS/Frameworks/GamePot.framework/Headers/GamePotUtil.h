@@ -24,4 +24,8 @@
 + (NSString *) md5:(NSString *) input;
 + (NSString *) randomStringWithLength:(int)_len;
 + (NSString *) getDeviceUUID;
+
++ (NSString *)hexStringFromData:(NSData*)_data;
++ (NSData *)dataFromHexString:(NSString *)_string;
+
 @end

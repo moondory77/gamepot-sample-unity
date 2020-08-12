@@ -5,6 +5,7 @@ using Realtime.LITJson;
 public class NPurchaseInfo
 {
     public string price { get; set; }               // 가격
+    public string adjustKey { get; set; }           // adjust Key
     public string productId { get; set; }           // 아이템 ID
     public string currency { get; set; }            // 통화
     public string orderId { get; set; }             // 스토어 order id

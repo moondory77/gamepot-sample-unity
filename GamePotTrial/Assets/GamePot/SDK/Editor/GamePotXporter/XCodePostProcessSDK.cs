@@ -46,7 +46,7 @@ public static class XCodePostProcessSDK
 		pbxProject.AddFrameworkToProject(targetGuid, "CoreGraphics.framework", false);
 		pbxProject.AddFrameworkToProject(targetGuid, "CoreText.framework", false);
 
-		// Adbirx
+		// Adbrix
 		pbxProject.AddFrameworkToProject(targetGuid, "MessageUI.framework", false);
 
 		// NaverCafe
@@ -72,7 +72,6 @@ public static class XCodePostProcessSDK
 
 		// Adjust
 		pbxProject.AddFrameworkToProject(targetGuid, "AdSupport.framework", false);
-
     	pbxProject.AddFrameworkToProject(targetGuid, "UserNotifications.framework", false);
 		
 		// Google
@@ -80,6 +79,31 @@ public static class XCodePostProcessSDK
     	pbxProject.AddFrameworkToProject(targetGuid, "LocalAuthentication.framework", false);
 
 		AddLibToProject (pbxProject, targetGuid, "libz.tbd");
+
+        //Unity 2019.03.x 이후 버전에서의 BuildTarget 재맵핑
+#if UNITY_2019_3_OR_NEWER
+        targetGuid = pbxProject.TargetGuidByName("UnityFramework");
+
+        pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
+        pbxProject.SetBuildProperty(targetGuid, "ENABLE_BITCODE", "NO");
+        pbxProject.SetBuildProperty(targetGuid, "GCC_ENABLE_OBJC_EXCEPTIONS", "YES");
+        pbxProject.SetBuildProperty(targetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
+        pbxProject.AddBuildProperty(targetGuid, "FRAMEWORK_SEARCH_PATHS", "$(inherited)");
+        // Google
+        pbxProject.AddFrameworkToProject(targetGuid, "LocalAuthentication.framework", false);
+        // Facebook & Google SignIn
+        pbxProject.AddFrameworkToProject(targetGuid, "SafariServices.framework", false);
+
+        //Target 원상복귀
+        targetGuid = pbxProject.TargetGuidByName("Unity-iPhone");
+
+        // Add Bundle  explicitly
+        AddBundle(pbxProject, targetGuid, pathToBuiltProject, "GamePot.bundle");
+        AddBundle(pbxProject, targetGuid, pathToBuiltProject, "GoogleSignIn.bundle");
+        AddBundle(pbxProject, targetGuid, pathToBuiltProject, "NaverAuth.bundle");
+        AddBundle(pbxProject, targetGuid, pathToBuiltProject, "NaverCafeSDK.bundle");
+#endif
+
 		const string frameworkPath = "Frameworks/Plugins/IOS/Frameworks/";
 
 		const string twitterCoreFrameworkName = "TwitterCore.framework";
@@ -115,8 +139,8 @@ public static class XCodePostProcessSDK
 
 		pbxProject.RemoveFileFromBuild(targetGuid, "TwitterCore.framework");
 		pbxProject.AddBuildProperty(targetGuid, "LD_RUNPATH_SEARCH_PATHS", "@executable_path/Frameworks");
-	
-	
+
+
 		//GamePot Config Key
 		if (File.Exists (pathToBuiltProject + "/GamePotConfig-Info.plist")) {
 			File.Delete (pathToBuiltProject + "/GamePotConfig-Info.plist");
@@ -165,11 +189,19 @@ public static class XCodePostProcessSDK
 		// Add URL Scheme
 		var array = plist.root.CreateArray ("CFBundleURLTypes");
 
-		if (gameDict.values.ContainsKey("gamepot_facebook_app_id") && gameDict ["gamepot_facebook_app_id"].AsString ().Equals ("") != true) {
-			var urlDict = array.AddDict ();
-			urlDict.SetString ("CFBundleURLName", "");
-			urlDict.CreateArray ("CFBundleURLSchemes").AddString ("fb" + gameDict ["gamepot_facebook_app_id"].AsString ());
-		}
+        if (gameDict.values.ContainsKey("gamepot_naver_urlscheme") && gameDict["gamepot_naver_urlscheme"].AsString().Equals("") != true)
+        {
+            var urlDict = array.AddDict();
+            urlDict.SetString("CFBundleURLName", "");
+            urlDict.CreateArray("CFBundleURLSchemes").AddString(gameDict["gamepot_naver_urlscheme"].AsString());
+        }
+
+        if (gameDict.values.ContainsKey("gamepot_facebook_app_id") && gameDict["gamepot_facebook_app_id"].AsString().Equals("") != true)
+        {
+            var urlDict = array.AddDict();
+            urlDict.SetString("CFBundleURLName", "");
+            urlDict.CreateArray("CFBundleURLSchemes").AddString("fb" + gameDict["gamepot_facebook_app_id"].AsString());
+        }
 
 		if (gameDict.values.ContainsKey("gamepot_google_url_schemes") && gameDict ["gamepot_google_url_schemes"].AsString ().Equals ("") != true) {
 			var urlDict = array.AddDict ();
@@ -196,7 +228,6 @@ public static class XCodePostProcessSDK
 		}
 		// Apply editing settings to Info.plist
 		plist.WriteToFile (plistPath);
-
 	}
 
 	private static void AddBundle(PBXProject project, string targetGuid, string pathToBuiltProject, string bundle)

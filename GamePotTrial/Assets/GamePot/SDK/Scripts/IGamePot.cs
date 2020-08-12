@@ -1,10 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public interface IGamePot
 {
-
     void onAppClose();
     void onNeedUpdate(NAppStatus status);
     void onMainternance(NAppStatus status);

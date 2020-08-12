@@ -11,16 +11,14 @@ public class GamePotSendLogCharacter
     public static string LEVEL = "level";
     public static string USERDATA = "userdata";
 
-    public GamePotSendLogCharacter(){}
-    
-    public JsonData body = new JsonData();
+    public GamePotSendLogCharacter() { }
 
+    public JsonData body = new JsonData();
 
     public void put(string key, string value)
     {
         body[key] = value;
     }
 
-    public string toString(){return body.ToJson();}
-
+    public string toString() { return body.ToJson(); }
 }

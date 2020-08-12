@@ -111,10 +111,22 @@ extern "C"
         [[GamePotManager sharedManager] coupon:GetStringParam(couponNumber) userData:GetStringParam(userData)];
     }
 
+    // void trackingByUnity(const char* adActions, const char* info)
+    // {
+    //     [[GamePotManager sharedManager] tracking:GetStringParam(adActions) info:GetStringParam(info)];
+    // }
+
+
     void logoutByUnity()
     {
         [[GamePotManager sharedManager] logout];
     }
+
+    // void naverCafeInitGlobalByUnity()
+    // {
+    //     // 함수 없음
+    // }
+
 
     void loginByUnity(const char* loginType)
     {
@@ -131,10 +143,20 @@ extern "C"
         [[GamePotManager sharedManager] cancelLocalPush:pushId];
     }
 
+    // void showNaverCafeByUnity(int menuIndex, BOOL landscape)
+    // {
+    //     [[GamePotManager sharedManager] showNaverCafe: menuIndex setLandScape: landscape];
+    // }
+    // void addAdByUnity(const char* adType)
+    // {
+    //     [[GamePotManager sharedManager] addAd:GetStringParam(adType)];
+    // }
+
     void enableGameCenterByUnity(bool enable)
     {
         [[GamePotManager sharedManager] enableGameCenter:enable];
     }
+
 
     void purchaseByUnity(const char* productId, const char* uniqueId, const char* serverId, const char* playerId, const char* etc)
     {
@@ -161,6 +183,15 @@ extern "C"
     {
         [[GamePotManager sharedManager]addChannel:GetStringParam(channelType)];
     }
+
+    // void setSandboxByUnity(BOOL enable)
+    // {
+    //     [[GamePotManager sharedManager] setSandbox:enable];
+    // }
+    // void setAdjustDataByUnity(const char* adjustBillingData)
+    // {
+    //     [[GamePotManager sharedManager] setAdjustData:GetStringParam(adjustBillingData)];
+    // }
 
     void setPushByUnity(BOOL pushEnable)
     {

@@ -7,7 +7,6 @@ using GamePotUnity;
 
 namespace GamePotUnityiOS
 {
-
     public class GamePotUnityPluginiOS
     {
         #region iOS DLL native functions
@@ -152,7 +151,6 @@ namespace GamePotUnityiOS
             Debug.Log("GamePot - Creating GamePot iOS Native Bridge Receiver");
             new GameObject("GamePotiOSManager", typeof(GamePotEventListener));
             pluginVersion(GamePot.UnityPluginVersion);
-
         }
 
         public static void setListener(IGamePot inter)
@@ -182,46 +180,6 @@ namespace GamePotUnityiOS
         //////////////////////
         // Common API
         //////////////////////
-
-        //////////////////////
-        // Chat API
-        //////////////////////
-
-        public static void joinChannel(String prevChannel)
-        {
-#if UNITY_IOS
-                joinChannelByUnity(prevChannel);
-#else
-            {
-                Debug.Log("GamePot -  UNITY EDITOR joinChannel not supported");
-            }
-#endif
-        }
-
-        public static void leaveChannel(String prevChannel)
-        {
-#if UNITY_IOS
-                leaveChannelByUnity(prevChannel);
-#else
-            {
-                Debug.Log("GamePot - UNITY EDITOR leaveChannel not supported");
-            }
-#endif
-        }
-
-        public static void sendMessage(String prevChannel, String message)
-        {
-#if UNITY_IOS
-            {
-                Debug.Log("chatMessage - prevChannel :  " + prevChannel + " / message : " + message);
-                sendMessageByUnity(prevChannel, message);
-            }
-#else
-            {
-                Debug.Log("GamePot - UNITY EDITOR sendMessage not supported");
-            }
-#endif
-        }
 
         public static string getLastLoginType()
         {
@@ -418,9 +376,6 @@ namespace GamePotUnityiOS
 #endif
         }
 
-
-
-
         public static string getLinkedList()
         {
 #if UNITY_IOS
@@ -560,6 +515,7 @@ namespace GamePotUnityiOS
 		return "";
 #endif
         }
+
 
         // TODO: push
         public static void setPush(bool pushEnable)

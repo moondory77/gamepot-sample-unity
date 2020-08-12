@@ -90,26 +90,20 @@ android {
             abiFilters **ABIFILTERS**
         }
 
-		resValue "string", "gamepot_project_id", "" // required
-        resValue "string", "gamepot_api_url", "" // required 10.78.160.183:4000
-        resValue "string", "gamepot_dash_url", ""
-        resValue "string", "gamepot_store", "google" // required
-        resValue "string", "gamepot_app_title","@string/app_name" // required (fcm)
-        resValue "string", "gamepot_push_default_channel","Default" // required (fcm)
-        resValue "string", "facebook_app_id", "" // optional (facebook)
-        resValue "string", "fb_login_protocol_scheme", "" // optional (facebook)
-
-		//resValue "string", "gamepot_twitter_consumerkey","xxxxx" // Twitter 개발자 콘솔에서 획득
-		//resValue "string", "gamepot_twitter_consumersecret","xxx" // Twitter 개발자 콘솔에서 획득
-		//resValue "string", "gamepot_line_channelid","00000000" // Line 개발자 콘솔에서 획득
-        //resValue "string", "gamepot_project_id", "" // required
-        //resValue "string", "gamepot_api_url", "" // required
-        //resValue "string", "gamepot_store", "google" // required
-        //resValue "string", "gamepot_app_title","@string/app_name" // required (fcm)
-        //resValue "string", "gamepot_push_default_channel","Default" // required (fcm)
-		//resValue "string", "facebook_app_id", "0" // optional (facebook)
-		//resValue "string", "fb_login_protocol_scheme", "fb0" // optional (facebook)
-		//resValue "string", "gamepot_elsa_projectid", "" // optional (ncp elsa)
+		resValue "string", "gamepot_project_id", "" 									   // required
+ 		resValue "string", "gamepot_api_url", "" 										   	 // required (공백값으로 유지해주세요.)
+   		resValue "string", "gamepot_dash_url", "" 										   // required (공백값으로 유지해주세요.)
+   		resValue "string", "gamepot_store", "google" 									 // required
+   		resValue "string", "gamepot_app_title","@string/app_name" 			  // required (fcm)
+   		resValue "string", "gamepot_push_default_channel","Default" 	 	  // required (fcm)
+   		resValue "string", "facebook_app_id", "" 								 			 // optional (facebook)
+ 		resValue "string", "fb_login_protocol_scheme", "" 								// optional (facebook)
+   		// resValue "string", "gamepot_naver_clientid", ""  							 // optional (Naver 개발자 콘솔에서 획득)
+   		// resValue "string", "gamepot_naver_secretid", ""  							// optional (Naver 개발자 콘솔에서 획득)
+   		// resValue "string", "gamepot_line_channelid",""								 // optional (Line 개발자 콘솔에서 획득)
+   		// resValue "string", "gamepot_twitter_consumerkey", ""					  // optional (Twitter 개발자 콘솔에서 획득) 
+   		// resValue "string", "gamepot_twitter_consumersecret", "" 				 // optional (Twitter 개발자 콘솔에서 획득)
+   		// resValue "string", "gamepot_elsa_projectid", ""								 // optional (ncp elsa)
 	}
 
 	lintOptions {

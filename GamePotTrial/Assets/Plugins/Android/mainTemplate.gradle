@@ -1,20 +1,21 @@
 buildscript {
 	repositories {
-		if (GradleVersion.current() >= GradleVersion.version("4.2")) {
+		// ### From Unity 2018.x gradle does not supports GradleVersion.current() function
+		// if (GradleVersion.current() >= GradleVersion.version("4.2")) {
             google()
             jcenter()
-        } else {
-            jcenter()
-        }
+        // } else {
+        //     jcenter()
+        // }
     }
     dependencies {
-		if (GradleVersion.current() < GradleVersion.version("4.0")) {
-            classpath 'com.android.tools.build:gradle:2.1.0'
-        } else if (GradleVersion.current() < GradleVersion.version("4.2")) {
-            classpath 'com.android.tools.build:gradle:2.3.0'
-        } else {
-            classpath 'com.android.tools.build:gradle:3.2.0'
-        }
+		// if (GradleVersion.current() < GradleVersion.version("4.0")) {
+        //     classpath 'com.android.tools.build:gradle:2.1.0'
+        // } else if (GradleVersion.current() < GradleVersion.version("4.2")) {
+        //     classpath 'com.android.tools.build:gradle:2.3.0'
+        // } else {
+            classpath 'com.android.tools.build:gradle:3.4.0'
+        // }
 		classpath 'com.google.gms:google-services:3.2.0'
 	}
 }
@@ -25,37 +26,37 @@ allprojects {
 			dirs 'libs'
 		}
 
-		if (GradleVersion.current() >= GradleVersion.version("4.2")) {
+		// if (GradleVersion.current() >= GradleVersion.version("4.2")) {
             google()
             jcenter()
-        } else {
-            jcenter()
-        }
+        // } else {
+        //     jcenter()
+        // }
    }
 }
 
 apply plugin: 'com.android.application'
 
 dependencies {
-	if (GradleVersion.current() >= GradleVersion.version("4.2")) {
+	// if (GradleVersion.current() >= GradleVersion.version("4.2")) {
 		implementation fileTree(include: ['*.jar'], dir: 'libs')
 		implementation project(":GamePotResources")
 		implementation project(':Firebase')
-	} else {
-		compile fileTree(include: ['*.jar'], dir: 'libs')
-		compile project(":GamePotResources")
-		compile project(':Firebase')
-	}
+	// } else {
+	// 	compile fileTree(include: ['*.jar'], dir: 'libs')
+	// 	compile project(":GamePotResources")
+	// 	compile project(':Firebase')
+	// }
 }
 
 fileTree(dir: 'libs', include: ['*.aar'])
         .each { File file ->
     //  println file.name
-	if (GradleVersion.current() >= GradleVersion.version("4.2")) {
+	// if (GradleVersion.current() >= GradleVersion.version("4.2")) {
 		dependencies.add("implementation", [name: file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it] : file.name }, ext: 'aar'])
-	} else {
-    	dependencies.add("compile", [name: file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it] : file.name }, ext: 'aar'])
-	}
+	// } else {
+    // 	dependencies.add("compile", [name: file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it] : file.name }, ext: 'aar'])
+	// }
 }
 
 android {
@@ -93,12 +94,20 @@ android {
 		resValue "string", "gamepot_project_id", "" // required
 		resValue "string", "gamepot_api_url", "" // required 10.78.160.183:4000
 		resValue "string", "gamepot_dash_url", ""
-		resValue "string", "gamepot_store", "" // required
+		resValue "string", "gamepot_store", "google" // required
 		resValue "string", "gamepot_app_title","@string/app_name" // required (fcm)
 		resValue "string", "gamepot_push_default_channel","Default" // required (fcm)
 		resValue "string", "facebook_app_id", "" // optional (facebook)
 		resValue "string", "fb_login_protocol_scheme", "" // optional (facebook)
+		resValue "string", "gamepot_elsa_projectid", "" // optional (ncp elsa)
+		resValue "string", "gamepot_line_channelid",""
+		resValue "string", "gamepot_naver_clientid", "" // optional (naver login)
+		resValue "string", "gamepot_naver_secretid", "" // optional (naver login)
+		resValue "string", "gamepot_twitter_consumerkey", ""
+		resValue "string", "gamepot_twitter_consumersecret", ""
+
 	}
+
 
 	lintOptions {
 		abortOnError false
